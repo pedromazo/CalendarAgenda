@@ -1,0 +1,10 @@
+<%- layout('/layouts/boilerplate') %> 
+<h2>MY EVENTS</h2>
+<% for (let event of eventos) {%>
+    <% let data = Date.parse(event.initDate) %> 
+<h3><%= data %> </h3>
+<ul>
+    <li><a href="events/<%=event._id%>"><%= event.eventName %></a></li>
+  
+</ul>
+<% } %> 

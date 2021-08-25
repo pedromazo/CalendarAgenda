@@ -1,0 +1,32 @@
+<%- layout('/layouts/boilerplate') %> 
+
+<h1 class="text-center">Criar Evento</h1>
+    <div class="col-md-6 offset-md-3">
+        <form action="/events" method="POST" class="mb-5 validated-form" novalidate> 
+            <!-- IN ORDER TO PARSE MULTIPART/FORM-DATA WE NEED A MIDDLEWARE, WE WILL INSTALL AND USE MULTER -->
+            <div class="mb-3">
+                <label class="form-label" for="title">Nome do Evento</label>
+                <input class="form-control" type="text" id="title" name="event[eventName]" required>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="initDate">Início</label>
+                <input class="form-control" type="datetime-local" id="initDate" name="event[initDate]" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="endDate">Fim</label>
+                <input class="form-control" type="datetime-local" id="endDate" name="event[endDate]" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Descrição</label>
+                <textarea class="form-control" type="text" id="description" name="event[eventDescription]" required></textarea>
+            </div class="mb-3">
+            <button class="btn btn-primary mb-2">Criar Evento</button>
+            <br>
+            </form>
+            <div class="mb-5">
+            <a class="mb-5"href="/">Voltar</a>
+        </div> 
+        </div>
+</div>
