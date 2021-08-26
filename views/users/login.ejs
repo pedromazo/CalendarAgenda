@@ -1,15 +1,22 @@
-<%- layout('layouts/boilerplate') %> 
+<%- layout('layouts/boilerplateLogReg') %> 
 
-<form action="/login" method="POST" class="validated-form" novalidate>
-    <div class="mb-3">
-        <label class="form-label" for="username">Usuário</label>
-        <input class="form-control" type="text" id="username" name="username" required>
-        <div class="valid-feedback">Looks Good!</div>
+
+
+
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
+    <div class="login border border-dark px-5 py-5">
+    <form action="/login" method="POST" class="validated-form" novalidate>
+        <div class="mb-3">
+            <label class="form-label" for="username">Usuário</label>
+            <input class="form-control" type="text" id="username" name="username" required>
+            <div class="valid-feedback">Show!</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="password">Senha</label>
+            <input class="form-control" type="password" id="password" name="password" required>
+            <div class="valid-feedback">Show!</div>
+        </div>
+        <button class="btn btn-success mt-5 w-100">Entrar!</button>
+    </form>
     </div>
-    <div class="mb-3">
-        <label class="form-label" for="password">Senha</label>
-        <input class="form-control" type="password" id="password" name="password" required>
-        <div class="valid-feedback">Looks Good!</div>
-    </div>
-    <button class="btn btn-success">Entrar!</button>
-</form>
+</div>

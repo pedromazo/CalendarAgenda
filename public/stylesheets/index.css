@@ -1,5 +1,8 @@
 .calendar .month {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgb(109, 109, 109);
+    padding-bottom: 10px;
+    padding-top: 8px;
+    color: whitesmoke;
 }
 
 .month li {
@@ -14,6 +17,8 @@
 .month .next {
     float: right;
     padding-right: 10px;
+    border: none;
+    background-color: none;
 }
 .month .prev {
     float: left;
@@ -39,7 +44,8 @@
 }
 .weekdays {
     margin: 0;
-    padding: 10px 0;
+    padding: 10px 0px;
+    padding-top: 50px;
     background-color: rgba(0,0,0,0.2);
 }
 .weekdays li {
@@ -47,4 +53,14 @@
     text-align: center;
     width: 13%;
 
+}
+
+.dia {
+    border: none;
+    background-color: white;
+}
+
+.change {
+    border: none;
+    background-color: rgb(109, 109, 109);
 }
