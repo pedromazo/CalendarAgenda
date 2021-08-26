@@ -1,6 +1,9 @@
 <%- layout('/layouts/boilerplate') %> 
 <h1><%= evento.eventName %> </h1>
 <p><%= evento.eventDescrip %> </p>
+<% if(evento.author) {%> 
+<p class="text-muted">Criado por: <%= evento.author.username %> </p>
+<% } %> 
 <form action="/events/<%=evento._id%>?_method=DELETE" method="POST">
     <a href="<%=evento._id%>/edit" class="px-2">Editar</a>
     <button class="btn btn-sm btn-danger">Deletar</button>

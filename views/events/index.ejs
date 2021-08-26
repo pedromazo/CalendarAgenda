@@ -1,10 +1,43 @@
 <%- layout('/layouts/boilerplate') %> 
-<h2>MY EVENTS</h2>
-<% for (let event of eventos) {%>
-    <% let data = Date.parse(event.initDate) %> 
-<h3><%= data %> </h3>
-<ul>
-    <li><a href="events/<%=event._id%>"><%= event.eventName %></a></li>
-  
-</ul>
-<% } %> 
+
+<div class="row">
+    <div class="col-8">
+            <h2>Meus Eventos:</h2>
+        <% for (let event of eventos) {%>
+            <% let data =new Date(Date(event.initDate)) %> 
+        <h3><%=data.getDate()%> - <%= data.getMonth()+1 %> - <%= data.getFullYear() %>  </h3>
+        <ul>
+            <li><a href="events/<%=event._id%>"><%= event.eventName %></a></li>
+        
+        </ul>
+        <% } %> 
+    </div>
+    <div class="col-lg-4">
+        <!-- <h2>Escolha o dia</h2> -->
+        <div class="calendar border border-dark">
+            <div class="month">
+            <ul>
+                <li class="prev">&#10094;</li>
+                <li>Agosto</li>
+                <li class="next">&#10095;</li>
+            </ul>
+        </div>
+        
+        <ul class="weekdays">
+            <li>Dom</li>
+            <li>Seg</li>
+            <li>Ter</li>
+            <li>Qua</li>
+            <li>Qui</li>
+            <li>Sex</li>
+            <li>Sáb</li>
+          </ul>
+
+        <ul class="days">
+            <% for (let i =1; i<=31;i++) {%>
+                <li><%= i %> </li> 
+                <% } %> 
+        </ul>
+        </div>
+        </div>
+</div>

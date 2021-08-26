@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const { Schema } = require("mongoose");
-const passportLocalMongoose = require('passport-local-mongoose');
+const { Schema } = mongoose;
+
 
 const EventSchema = new Schema({
     author: {

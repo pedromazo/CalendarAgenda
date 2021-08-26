@@ -1,0 +1,50 @@
+.calendar .month {
+    background-color: rgba(0,0,0,0.2);
+}
+
+.month li {
+    display: inline-block;
+}
+
+.calendar ul {
+    list-style-type: none;
+    padding:0%;
+}
+
+.month .next {
+    float: right;
+    padding-right: 10px;
+}
+.month .prev {
+    float: left;
+    padding-left: 10px;
+}
+  
+
+.days li {
+    list-style-type: none ;
+    display: inline-block;
+    text-align: center;
+    width: 13%;
+    margin-left: 0px;
+    padding: 0;
+}
+
+.month ul {
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+    margin: 0;
+    padding: 0;
+}
+.weekdays {
+    margin: 0;
+    padding: 10px 0;
+    background-color: rgba(0,0,0,0.2);
+}
+.weekdays li {
+    display: inline-block;
+    text-align: center;
+    width: 13%;
+
+}
