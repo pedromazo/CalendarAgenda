@@ -64,3 +64,7 @@
     border: none;
     background-color: rgb(109, 109, 109);
 }
+
+.event {
+    text-decoration: none;
+}

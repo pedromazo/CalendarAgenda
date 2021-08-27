@@ -12,6 +12,7 @@ const User = require('./models/users');
 const flash = require('connect-flash');
 const eventsRoutes = require('./routes/events');
 const userRoutes = require('./routes/users');
+const ExpressError = require('./utils/ExpressErrors')
 
 app.engine('ejs', ejsMate); 
 app.set('view engine', 'ejs');
@@ -65,6 +66,17 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+
+app.all('*',(req,res,next) => {
+    next(new ExpressError('Page not found', 404))
+})
+
+app.use((err,req,res,next) => { //middleware for hangling errors
+    const {statusCode = 500} = err;
+    if(!err.message) err.message = 'Algo de errado não está certo...';
+    res.status(statusCode).render('error', { err });
+
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)

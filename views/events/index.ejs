@@ -1,14 +1,17 @@
 <%- layout('/layouts/boilerplate') %> 
+<% let NOW = ''; %> 
 
 <div class="row">
     <div class="col-8">
+
             <h2>Meus Eventos:</h2>
         <% for (let event of eventos) {%>
-            <% let data =new Date(Date(event.initDate)) %> 
-        <h3><%= data %> <%=data.getDate()%> - <%= data.getMonth()+1 %> - <%= data.getFullYear() %>  </h3>
+            <% let dataInit =new Date(event.initDate) %> 
+            <% let dataEnd =new Date(event.endDate) %> 
+        <h3> <%=`${dataInit.getDate()} de ${auxMonth.mes[dataInit.getMonth()]} de ${dataInit.getFullYear()} às ${dataInit.getHours()}:${dataInit.getMinutes()}`%> </h3>
         <ul>
-            <li><a href="events/<%=event._id%>"><%= event.eventName %></a></li>
-        
+            <% if(Date.now() > dataInit.getTime() && Date.now() < dataEnd.getTime()){NOW = 'Acontecendo agora!'} else {NOW = ''} %> 
+            <li><a class="event" href="events/<%=event._id%>"><%= event.eventName %></a> <% if(NOW){ %> <span class="badge bg-success"><%= NOW %> </span></li> <% } %> 
         </ul>
         <% } %> 
     </div>

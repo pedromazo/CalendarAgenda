@@ -24,7 +24,6 @@ module.exports.createEvent = async (req, res) => {
      event.author = req.user._id;
      const autor = await User.findById(req.user._id).populate('events');
      autor.events.push(event);
-     console.log(autor)
      await autor.save();
      await event.save();
      req.flash('success', 'Evento criado com sucesso!')
@@ -58,12 +57,7 @@ module.exports.deleteEvent = async (req, res) => {
     const { id } = req.params;
     const evento = await Event.findByIdAndDelete(id);
     const autor = await User.findById(req.user._id).populate('events');
-    console.log(autor);
-    // await autor.updateOne({$pull: {events: {_id: id}}});
-    // console.log(autor)
-    autor.events.pop(evento);
-    await autor.save();
-    console.log('AAAAAAAAA', autor)
-    req.flash('success', 'Evento excluído com sucesso!')
+    await autor.updateOne({$pull: {events: {$in: id}}});
+    req.flash('success', 'Evento excluído com sucesso!');
     res.redirect('/events');
 };
