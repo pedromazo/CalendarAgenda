@@ -15,8 +15,13 @@ module.exports.registerUser = async (req, res) => {
         res.redirect('/events');
     })
 } catch (e) {
+    if(e.message==='A user with the given username is already registered'){
+    req.flash('error','Este usuário já esta sendo usado')
+    res.redirect('/register');
+    } else {
     req.flash('error',e.message)
     res.redirect('/register');
+    }
 }
 };
 

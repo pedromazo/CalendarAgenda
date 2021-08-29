@@ -1,0 +1,17 @@
+.eventDescripTitle {
+
+font-size: 1.2rem;
+font-weight: 500;
+}
+#showEventCard {
+    background-color: rgba(238, 238, 238, 0.432);
+    padding: 50px ;
+    border-radius: 5%;
+    border-style: dotted;
+    margin-bottom: 30px;
+    border-color: black;
+}
+
+#diaVazio {
+    margin-right: 500px;
+}

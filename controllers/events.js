@@ -1,6 +1,11 @@
 const Event = require('../models/events');
-const User = require('../models/users')
+const User = require('../models/users');
+const { monthProperties } = require('../months');
 // const {monthProperties} = require('../months')
+const auxMonth = {
+    mes:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro', 'Outubro', 'Novembro', 'Dezembro']
+};
+// const month1 = require('../public/calendar');
 
 module.exports.renderHome = (req,res) => {
     res.render('home.ejs')
@@ -11,15 +16,20 @@ module.exports.renderNew = (req, res) => {
 };
 
 module.exports.eventList = async (req,res) => {
+    let year, day, month = '';
+    console.log(month)
+    if(req.query){
+        month=req.query.month;
+        year=req.query.year;
+        day=req.query.day;
+    }
     const user = await User.findById(req.user._id).populate('events');
     const eventos = await Event.find({author:req.user._id});
-    const auxMonth = {
-        mes:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro', 'Outubro', 'Novembro', 'Dezembro']
-    };
-    res.render('events/index', { eventos, auxMonth})
+    res.render('events/index', { eventos, auxMonth, year, day, month})
 };
 
 module.exports.createEvent = async (req, res) => {
+    console.log(req.body.event.initTime);
      const event = new Event(req.body.event);
      event.author = req.user._id;
      const autor = await User.findById(req.user._id).populate('events');
@@ -35,7 +45,7 @@ module.exports.showEvent = async (req, res) => {
     // console.log(id)
     const evento = await Event.findById(id).populate('author');
     // console.log(evento)
-    res.render('events/show', { evento })
+    res.render('events/show', { evento, auxMonth })
 };
 
 module.exports.showFormEdit = async (req, res) => {

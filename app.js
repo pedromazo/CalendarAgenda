@@ -12,7 +12,7 @@ const User = require('./models/users');
 const flash = require('connect-flash');
 const eventsRoutes = require('./routes/events');
 const userRoutes = require('./routes/users');
-const ExpressError = require('./utils/ExpressErrors')
+const ExpressError = require('./utils/ExpressErrors');
 
 app.engine('ejs', ejsMate); 
 app.set('view engine', 'ejs');
@@ -81,3 +81,4 @@ app.use((err,req,res,next) => { //middleware for hangling errors
 app.listen(port, () => {
     console.log(`listening on port ${port}`)
 });
+

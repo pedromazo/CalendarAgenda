@@ -1,0 +1,39 @@
+<% let now = new Date(Date.now()) %> 
+
+
+<div class="col-xl-4">
+    <!-- <h2>Escolha o dia</h2> -->
+    <div class="calendar border border-dark">
+        <div class="month">
+            <h2 id="selectedYear"><%= now.getFullYear() %> </h2>
+        <ul>
+            <li class="prev"><button class="change" id="minusMonth">&#10094;</button></li>
+            <li id="selectedMonth"><%=auxMonth.mes[now.getMonth()] %> </li>
+            <li class="next"><button class="change" id="plusMonth">&#10095;</button></li>
+        </ul>
+    </div>
+    
+    <ul class="weekdays">
+        <li>Dom</li>
+        <li>Seg</li>
+        <li>Ter</li>
+        <li>Qua</li>
+        <li>Qui</li>
+        <li>Sex</li>
+        <li>Sáb</li>
+      </ul>
+
+    <ul class="days">
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <button class="dia blankSpace" id="diaVazio">___</button>
+        <% for (let i =1; i<=31;i++) {%>
+            <li><button class="dia" id="dia"><%= i %></button></li> 
+        <% } %> 
+    </ul>
+    </div>
+    </div>
+

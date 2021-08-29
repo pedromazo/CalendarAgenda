@@ -1,10 +1,27 @@
 <%- layout('/layouts/boilerplate') %> 
+<% let dataInit =new Date(evento.initDate) %> 
+<% let dataEnd =new Date(evento.endDate) %> 
+
+<div class="container" id="showEventCard">
 <h1><%= evento.eventName %> </h1>
-<p><%= evento.eventDescrip %> </p>
-<% if(evento.author) {%> 
-<p class="text-muted">Criado por: <%= evento.author.username %> </p>
+
+<p><b>Início:</b> <%=`${dataInit.getUTCDate()} de ${auxMonth.mes[dataInit.getMonth()]} de ${dataInit.getFullYear()} às ${evento.initTime}`%></p>
+<p><b>Fim:</b> <%=`${dataEnd.getUTCDate()} de ${auxMonth.mes[dataEnd.getMonth()]} de ${dataEnd.getFullYear()} às ${evento.endTime}`%></p>
+
+
+<% if (evento.eventDescrip) { %> 
+    <p class="eventDescripTitle">Descrição:</p>
+    <p class="eventDescripText ps-3"><%= evento.eventDescrip %> </p>
 <% } %> 
+
+<% if(evento.author) {%> 
+    <p class="text-muted">Criado por: <%= evento.author.username %> </p>
+<% } %> 
+
+    
+
 <form action="/events/<%=evento._id%>?_method=DELETE" method="POST">
-    <a href="<%=evento._id%>/edit" class="px-2">Editar</a>
+    <a href="<%=evento._id%>/edit" class="btn btn-sm btn-warning px-2">Editar</a>
     <button class="btn btn-sm btn-danger">Deletar</button>
-    </form>
+</form>
+</div>

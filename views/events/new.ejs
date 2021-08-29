@@ -9,18 +9,36 @@
                 <input class="form-control" type="text" id="title" name="event[eventName]" required>
                 <div class="valid-feedback">Show!</div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="initDate">Início</label>
-                <input class="form-control" type="datetime-local" id="initDate" name="event[initDate]" required>
+            <p>Início</p>
+            <div class="container">
+                <div class="input-group mb-3">
+                    <div class="col pe-3">
+                        <label class="form-label" for="initDate">Data</label>
+                        <input class="form-control" type="date" id="initDate" name="event[initDate]" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="initTime">Horário</label>
+                        <input class="form-control" type="time" id="initTime" name="event[initTime]" required>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" for="endDate">Fim</label>
-                <input class="form-control" type="datetime-local" id="endDate" name="event[endDate]" required>
+            <p>Fim</p>
+            <div class="container">
+                <div class="input-group mb-3">
+                    <div class="col pe-3">
+                        <label class="form-label" for="endDate">Data</label>
+                        <input class="form-control" type="date" id="endDate" name="event[endDate]" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label" for="endTime">Horário</label>
+                        <input class="form-control" type="time" id="endTime" name="event[endTime]" required>
+                    </div>
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Descrição</label>
-                <textarea class="form-control" type="text" id="description" name="event[eventDescrip]" required></textarea>
+                <textarea class="form-control" type="text" id="description" name="event[eventDescrip]" ></textarea>
             </div class="mb-3">
             <button class="btn btn-primary mb-2">Criar Evento</button>
             <br>

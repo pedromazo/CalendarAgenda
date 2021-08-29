@@ -1,18 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { isLoggedIn, validateEvent, checkForConflict } = require('../middleware');
+const { isLoggedIn, validateEvent, checkForConflict, isAuthor } = require('../middleware');
 const events = require('../controllers/events')
+const catchAsync = require('../utils/catchAsync');
 
 router.route('/')
-        .get(isLoggedIn, events.eventList)
-        .post(isLoggedIn, validateEvent, checkForConflict, events.createEvent);
+        .get(isLoggedIn, catchAsync(events.eventList))
+        .post(isLoggedIn, validateEvent, catchAsync(events.createEvent));
         
 router.route('/:id')
-        .get(isLoggedIn, events.showEvent)
-        .put(isLoggedIn, validateEvent, checkForConflict, events.editEvent)
-        .delete(isLoggedIn, events.deleteEvent);
+        .get(isLoggedIn, isAuthor, catchAsync(events.showEvent))
+        .put(isLoggedIn, isAuthor, validateEvent, catchAsync(checkForConflict), catchAsync(events.editEvent))
+        .delete(isLoggedIn, isAuthor, catchAsync(events.deleteEvent));
 
-router.get('/:id/edit', isLoggedIn, events.showFormEdit);
+router.get('/:id/edit', isLoggedIn, catchAsync(events.showFormEdit));
 
 
 module.exports = router;
