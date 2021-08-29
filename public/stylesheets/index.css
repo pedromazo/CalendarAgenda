@@ -1,5 +1,5 @@
 .calendar .month {
-    background-color: rgb(109, 109, 109);
+    background-color: #457b9d;
     padding-bottom: 10px;
     padding-top: 8px;
     color: whitesmoke;
@@ -47,7 +47,7 @@
     margin: 0;
     padding: 10px 0px;
     padding-top: 50px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: #a8dadc;
 }
 .weekdays li {
     display: inline-block;
@@ -63,7 +63,8 @@
 
 .change {
     border: none;
-    background-color: rgb(109, 109, 109);
+    background-color: #457b9d;
+
 }
 
 .event {
@@ -83,4 +84,10 @@ overflow: hidden;
 #blankSpace {
     visibility: hidden;
     width: 13%;
+}
+
+#selectedYear {
+    font-size: medium;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }

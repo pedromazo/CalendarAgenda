@@ -22,17 +22,22 @@ module.exports.validateEvent = (req, res, next) => {
 };
 
 module.exports.checkForConflict = async (req, res, next) => {
-     const {initDate, endDate} = req.body.event;
+     const {initDate, endDate, initTime, endTime} = req.body.event;
      const { id } = req.params
     const eventos = await Event.find({'author':req.user._id})
-    const editedEvent = await Event.findById(id)
-    console.log(editedEvent)
+    let editedEvent = await Event.findById(id)
+    const beginEvent = Date.parse(`${initDate} ${initTime}`);
+    const endEvent = Date.parse(`${endDate} ${endTime}`);
     for (let evento of eventos) {
+        const beginExistedEvent = Date.parse(`${evento.initDate} ${evento.initTime}`);
+        const endExistedEvent = Date.parse(`${evento.endDate} ${evento.endTime}`);
+        if(!editedEvent) {editedEvent = ''} //caso não haja evento sendo editado
         if(editedEvent._id !== evento._id){  //garantir que um evento não conflite com ele mesmo
-            if((evento.initDate > initDate && evento.initDate < endDate)
-            || (evento.endDate < endDate && evento.endDate > initDate)
-            || (evento.initDate > initDate && evento.endDate < endDate) 
-            || (evento.initDate < initDate && evento.endDate > endDate)) {
+
+            if((beginEvent > beginExistedEvent && beginEvent < endExistedEvent)
+            || (endEvent < endExistedEvent && endEvent > beginExistedEvent)
+            || (beginEvent > beginExistedEvent && endEvent < endExistedEvent) 
+            || (beginEvent < beginExistedEvent && endEvent > endExistedEvent)) {
                 req.flash('error', 'Este evento conflita com outro evento de sua agenda.');
                 return res.redirect('/events');
             }   

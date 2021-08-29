@@ -101,7 +101,7 @@ minus.onclick = () => {
     for(let j=0;j<properties.blankSpaces;j++) {blankDays[j].id='blankSpace'};
 
     for (let dia of dias) {
-        if(dia.innerText == now.getDate()) {dia.className="hoje"};
+        if((dia.innerText == now.getDate()) && (month==now.getMonth()+1) && (year == now.getFullYear())) {dia.className="hoje"} else {dia.className="dia"};
         for(let j = 29; j<=properties.totalDias; j++){
             if(dia.innerText==j){dia.id="dia"}}
         for (let j = 31; j>properties.totalDias;j--){
@@ -128,7 +128,7 @@ plus.onclick = () => {
     for(let j=0;j<properties.blankSpaces;j++) {blankDays[j].id='blankSpace'};
 
     for (let dia of dias) {
-        if(dia.innerText == now.getDate()) {dia.className="hoje"};
+        if((dia.innerText == now.getDate()) && (month==now.getMonth()+1) && (year == now.getFullYear())) {dia.className="hoje"} else {dia.className="dia"};
         for(let j = 29; j <= diaMax; j++){
             if(dia.innerText==j){dia.id="dia"}}
         for (let j = 31; j > diaMax;j--){

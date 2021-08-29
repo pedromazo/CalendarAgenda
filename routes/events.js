@@ -6,7 +6,7 @@ const catchAsync = require('../utils/catchAsync');
 
 router.route('/')
         .get(isLoggedIn, catchAsync(events.eventList))
-        .post(isLoggedIn, validateEvent, catchAsync(events.createEvent));
+        .post(isLoggedIn, validateEvent, catchAsync(checkForConflict), catchAsync(events.createEvent));
         
 router.route('/:id')
         .get(isLoggedIn, isAuthor, catchAsync(events.showEvent))
