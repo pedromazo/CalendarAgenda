@@ -1,10 +1,9 @@
 const Event = require('../models/events');
 const User = require('../models/users');
 const { monthProperties } = require('../months');
+const {auxMonth, comparar} = require('../middleware')
 // const {monthProperties} = require('../months')
-const auxMonth = {
-    mes:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro', 'Outubro', 'Novembro', 'Dezembro']
-};
+
 // const month1 = require('../public/calendar');
 
 module.exports.renderHome = (req,res) => {
@@ -24,7 +23,9 @@ module.exports.eventList = async (req,res) => {
     }
     const user = await User.findById(req.user._id).populate('events');
     // const eventos = await Event.find({author:req.user._id});
-    const eventos = user.events;
+    const eventosUnsorted = user.events;
+    const eventos = eventosUnsorted.sort(comparar);
+    console.log(eventos);
     res.render('events/index', { eventos, auxMonth, year, day, month})
 };
 

@@ -1,8 +1,7 @@
-const User = require('../models/users')
-const Event = require('../models/events')
-const auxMonth = {
-    mes:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro', 'Outubro', 'Novembro', 'Dezembro']
-};
+const User = require('../models/users');
+const Event = require('../models/events');
+const {auxMonth, comparar}= require('../middleware');
+
 
 module.exports.showFormRegister = (req, res) => {
     res.render('users/register');
@@ -46,7 +45,8 @@ module.exports.logout = (req, res) => {
 
 module.exports.inviteList = async (req, res) => {
     const user = await User.findById(req.user._id).populate('invites');
-    const invites = user.invites;
+    const invitesUnsorted = user.invites;
+    const invites = invitesUnsorted.sort(comparar);
     res.render('users/invites', {invites, auxMonth})
 }
 

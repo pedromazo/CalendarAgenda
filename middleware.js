@@ -58,3 +58,31 @@ module.exports.isAuthor = async (req, res, next) => {
     }
     next();
 }
+
+module.exports.auxMonth = {
+    mes:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto','Setembro', 'Outubro', 'Novembro', 'Dezembro']
+};
+
+// const comparar = function compare(a, b) { 
+//     const data1= new Date(a.initDate);
+//     const data2 = new Date(b.initDate);
+
+//     let comparison = 0;
+//     if (data1 > data2) {
+//         comparison = 1
+//     } else if (data1 < data2) {
+//         comparison = -1
+//     } return comparison
+// };
+
+module.exports.comparar = function compare(a, b) { 
+    const data1= new Date(a.initDate);
+    const data2 = new Date(b.initDate);
+
+    let comparison = 0;
+    if (data1 > data2) {
+        comparison = 1
+    } else if (data1 < data2) {
+        comparison = -1
+    } return comparison
+};
