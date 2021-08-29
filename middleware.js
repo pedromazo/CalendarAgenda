@@ -1,4 +1,5 @@
 const Event = require('./models/events');
+const User= require('./models/users')
 
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -34,10 +35,10 @@ module.exports.checkForConflict = async (req, res, next) => {
         if(!editedEvent) {editedEvent = ''} //caso não haja evento sendo editado
         if(editedEvent._id !== evento._id){  //garantir que um evento não conflite com ele mesmo
 
-            if((beginEvent > beginExistedEvent && beginEvent < endExistedEvent)
-            || (endEvent < endExistedEvent && endEvent > beginExistedEvent)
-            || (beginEvent > beginExistedEvent && endEvent < endExistedEvent) 
-            || (beginEvent < beginExistedEvent && endEvent > endExistedEvent)) {
+            if((beginEvent > beginExistedEvent && beginEvent < endExistedEvent) //Evento começa no meio de outro evento
+            || (endEvent < endExistedEvent && endEvent > beginExistedEvent) //Evento termina no meio de outro evento
+            || (beginEvent > beginExistedEvent && endEvent < endExistedEvent)  //Evento esta contigo em outro evento
+            || (beginEvent < beginExistedEvent && endEvent > endExistedEvent)) { //Evento esta contendo outro evento
                 req.flash('error', 'Este evento conflita com outro evento de sua agenda.');
                 return res.redirect('/events');
             }   
@@ -50,7 +51,8 @@ module.exports.checkForConflict = async (req, res, next) => {
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
     const evento = await Event.findById(id);
-    if(!evento.author.equals(req.user._id)) {
+    const convidado = await User.find({invites:id})
+    if(!evento.author.equals(req.user._id) && convidado) {
         req.flash('error', 'Você não tem permissão pra isso!');
         return res.redirect('/events');
     }

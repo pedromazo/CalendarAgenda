@@ -17,19 +17,18 @@
 <% if(evento.author) {%> 
     <p class="text-muted">Criado por: <%= evento.author.username %> </p>
 <% } %> 
-
-    
-
-<form action="/events/<%=evento._id%>?_method=DELETE" method="POST">
-    <a href="<%=evento._id%>/edit" class="btn btn-sm btn-warning px-2">Editar</a>
-    <button class="btn btn-sm btn-danger">Deletar</button>
-</form>
-
-<form action="/invites" method="POST">
-    <label for="friend"></label>
-    <input type="text" id="friend" name="friend">
-    <input type="hidden" id="eventId" name="eventId" value="<%= evento._id %>">
-    <button class="btn btn-primary">Convidar</button>
-</form>
+<div class="container">
+<div class="row">
+    <div class="col">
+    <form action="/invites/<%=evento._id%>" method="POST">
+        <button class="btn btn-success">Aceitar Convite</button>
+    </form>
+</div> <div class="col">
+    <form action="/invites/<%=evento._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-danger">Recusar Convite</button>
+    </form>
+</div>
+</div>
+</div>
 
 </div>

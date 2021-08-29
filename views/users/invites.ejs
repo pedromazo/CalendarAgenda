@@ -1,0 +1,17 @@
+<%- layout('layouts/boilerplate') %> 
+
+<h2>Meus Convites:</h2>
+<% for (let event of invites){ %> 
+
+    <% let dataInit =new Date(event.initDate) %> 
+    <% let dataEnd =new Date(event.endDate) %> 
+    <% let begin = Date.parse(`${event.initDate} ${event.initTime}`) %> 
+    <% let end = Date.parse(`${event.endDate} ${event.endTime}`) %> 
+
+    <h3> <%=`${dataInit.getUTCDate()} de ${auxMonth.mes[dataInit.getMonth()]} de ${dataInit.getFullYear()} às ${event.initTime}`%> </h3>
+        <ul>
+            <% if(Date.now() > begin && Date.now() < end){happeningNow = 'Acontecendo agora!'} else {happeningNow = ''} %> 
+            <li><a class="event" href="invites/<%=event._id%>"><%= event.eventName %></a> <% if(happeningNow){ %> <span class="badge bg-success"><%= happeningNow %> </span></li> <% } %>
+        </ul>
+
+    <% } %> 

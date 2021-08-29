@@ -17,19 +17,18 @@ module.exports.renderNew = (req, res) => {
 
 module.exports.eventList = async (req,res) => {
     let year, day, month = '';
-    console.log(month)
     if(req.query){
         month=req.query.month;
         year=req.query.year;
         day=req.query.day;
     }
     const user = await User.findById(req.user._id).populate('events');
-    const eventos = await Event.find({author:req.user._id});
+    // const eventos = await Event.find({author:req.user._id});
+    const eventos = user.events;
     res.render('events/index', { eventos, auxMonth, year, day, month})
 };
 
 module.exports.createEvent = async (req, res) => {
-    console.log(req.body.event.initTime);
      const event = new Event(req.body.event);
      event.author = req.user._id;
      const autor = await User.findById(req.user._id).populate('events');

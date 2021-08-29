@@ -20,4 +20,13 @@ router.route('/login')
 
 router.get('/logout', users.logout);
 
+router.route('/invites')
+        .get(isLoggedIn, users.inviteList)
+        .post(isLoggedIn, users.inviteFriend)
+
+router.route('/invites/:id')
+        .get(users.showInvite)
+        .post(users.acceptInvite)
+        .delete(users.declineInvite)
+
 module.exports = router;
