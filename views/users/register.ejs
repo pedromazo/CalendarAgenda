@@ -2,27 +2,24 @@
 
 <div class="container d-flex justify-content-center align-items-center mt-5 mb-5">
     <div class="login border border-dark px-5 py-5">
-
-
-
-<form action="/register" method="POST" class="validated-form" novalidate>
-    <p class="registering">Faça parte do clube!</p>
-    <div class="mb-3">
-        <label class="form-label" for="username">Usuário</label>
-        <input class="form-control" type="text" id="username" name="username" required>
-        <div class="valid-feedback">Show!</div>
+        <form action="/register" method="POST" class="validated-form" novalidate>
+            <p class="registering">Faça parte do clube!</p>
+            <div class="mb-3">
+                <label class="form-label" for="username">Usuário</label>
+                <input class="form-control" type="text" id="username" name="username" required>
+                <div class="valid-feedback">Show!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="email">Email</label>
+                <input class="form-control" type="email" id="email" name="email" required>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="password">Senha</label>
+                <input class="form-control" type="password" id="password" name="password" required>
+                <div class="valid-feedback">Show!</div>
+            </div>
+            <button class="btn btn-success w-100">Registrar!</button>
+        </form>
     </div>
-    <div class="mb-3">
-        <label class="form-label" for="email">Email</label>
-        <input class="form-control" type="email" id="email" name="email" required>
-        <div class="valid-feedback">Looks Good!</div>
-    </div>
-    <div class="mb-3">
-        <label class="form-label" for="password">Senha</label>
-        <input class="form-control" type="password" id="password" name="password" required>
-        <div class="valid-feedback">Show!</div>
-    </div>
-    <button class="btn btn-success w-100">Registrar!</button>
-</form>
-</div>
 </div>

@@ -103,7 +103,8 @@ minus.onclick = () => {
     for (let dia of dias) {
         if((dia.innerText == now.getDate()) && (month==now.getMonth()+1) && (year == now.getFullYear())) {dia.className="hoje"} else {dia.className="dia"};
         for(let j = 29; j<=properties.totalDias; j++){
-            if(dia.innerText==j){dia.id="dia"}}
+            if(dia.innerText==j){dia.id="dia"}
+        }
         for (let j = 31; j>properties.totalDias;j--){
             if(dia.innerText==j){dia.id="diaVazio"}
         }
@@ -133,22 +134,20 @@ plus.onclick = () => {
             if(dia.innerText==j){dia.id="dia"}}
         for (let j = 31; j > diaMax;j--){
             if(dia.innerText==j){dia.id="diaVazio"}
-        }}
-}
+        }
+    }
+};
 
 
 for (let dia of dias) {
     if(dia.innerText == now.getDate()) {dia.className="hoje"};
-    // for(let j = 31; j>=properties.totalDias; j--){
-    //     if(dia.innerText==j){dia.id="diaVazio"} else {dia.id="dia"}
-    // }
 
     dia.onclick = function () {
             let searchParams = new URLSearchParams(window.location.search);
             searchParams.set("day", dia.innerText);
             searchParams.set("month", month);
             searchParams.set("year", year);
-            window.location.search = searchParams.toString();
+            window.location.search = searchParams.toString(); //adiciona uma query string que filtrara os eventos
             console.log(dia)
     }
 };

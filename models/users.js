@@ -18,6 +18,6 @@ const UserSchema = new Schema({
     }]
 });
 
-UserSchema.plugin(passportLocalMongoose); //It adds on a fied for username and password, ensures that the users are unique and give us aditional methods
+UserSchema.plugin(passportLocalMongoose); //Adiciona um campo para username e password, garante que o username é unico, adiciona varios metodos no req, entre outras coisas
 
 module.exports = mongoose.model('User', UserSchema);

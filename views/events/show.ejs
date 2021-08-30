@@ -3,33 +3,43 @@
 <% let dataEnd =new Date(evento.endDate) %> 
 
 <div class="container" id="showEventCard">
-<h1><%= evento.eventName %> </h1>
+    <h1><%= evento.eventName %> </h1>
 
-<p><b>Início:</b> <%=`${dataInit.getUTCDate()} de ${auxMonth.mes[dataInit.getMonth()]} de ${dataInit.getFullYear()} às ${evento.initTime}`%></p>
-<p><b>Fim:</b> <%=`${dataEnd.getUTCDate()} de ${auxMonth.mes[dataEnd.getMonth()]} de ${dataEnd.getFullYear()} às ${evento.endTime}`%></p>
+    <p>
+        <b>Início:</b> <%=`${dataInit.getUTCDate()} de ${auxMonth.mes[dataInit.getMonth()]} de ${dataInit.getFullYear()} às ${evento.initTime}`%>
+    </p>
+
+    <p>
+        <b>Fim:</b> <%=`${dataEnd.getUTCDate()} de ${auxMonth.mes[dataEnd.getMonth()]} de ${dataEnd.getFullYear()} às ${evento.endTime}`%>
+    </p>
 
 
-<% if (evento.eventDescrip) { %> 
-    <p class="eventDescripTitle">Descrição:</p>
-    <p class="eventDescripText ps-3"><%= evento.eventDescrip %> </p>
-<% } %> 
+    <% if (evento.eventDescrip) { %> 
+        <p class="eventDescripTitle">Descrição:</p>
+        <p class="eventDescripText ps-3 text-break"><%= evento.eventDescrip %> </p>
+    <% } %> 
 
-<% if(evento.author) {%> 
-    <p class="text-muted">Criado por: <%= evento.author.username %> </p>
-<% } %> 
+    <% if(evento.author) {%> 
+        <p class="text-muted">Criado por: <%= evento.author.username %> </p>
+    <% } %> 
 
-    
-
-<form action="/events/<%=evento._id%>?_method=DELETE" method="POST">
-    <a href="<%=evento._id%>/edit" class="btn btn-sm btn-warning px-2">Editar</a>
-    <button class="btn btn-sm btn-danger">Deletar</button>
-</form>
-
-<form action="/invites" method="POST">
-    <label for="friend"></label>
-    <input type="text" id="friend" name="friend">
-    <input type="hidden" id="eventId" name="eventId" value="<%= evento._id %>">
-    <button class="btn btn-primary">Convidar</button>
-</form>
-
+        
+<div class="container">
+    <div class="row">
+        <div class="col">
+        <form action="/events/<%=evento._id%>?_method=DELETE" method="POST">
+            <a href="<%=evento._id%>/edit" class="btn btn-sm btn-warning px-2">Editar</a>
+            <button class="btn btn-sm btn-danger">Deletar</button>
+        </form>
+        </div>
+        <div class="col">
+        <form action="/invites" method="POST">
+            <label for="friend" class="my-2">Convide um amigo!</label>
+            <input type="text" id="friend" name="friend" placeholder="Nome de usuário do amigo" class="mb-3">
+            <input type="hidden" id="eventId" name="eventId" value="<%= evento._id %>">
+            <button class="btn btn-primary ms-auto">Convidar</button>
+        </form>
+        </div>
+    </div>
+</div>
 </div>

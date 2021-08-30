@@ -68,9 +68,7 @@ module.exports.inviteFriend = async (req, res) => {
 module.exports.showInvite = async (req, res) => {
     const { id } = req.params;
     const evento = await Event.findById(id).populate('author');
-    const user = await User.findById(req.user._id)
     res.render('users/inviteShow', {evento, auxMonth})
-    console.log(event)
 };
 
 module.exports.acceptInvite = async (req, res) => {
@@ -86,7 +84,6 @@ module.exports.acceptInvite = async (req, res) => {
 
 module.exports.declineInvite = async (req, res) => {
     const { id } = req.params;
-    const evento = await Event.findById(id).populate('author');
     const user = await User.findById(req.user._id)
     await user.updateOne({$pull: {invites: {$in: id}}});
     await user.save();

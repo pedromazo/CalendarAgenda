@@ -27,8 +27,7 @@ const EventSchema = new Schema({
     endDate: {
         type: String,
         required: true
-    },
-    isSecret: Boolean
+    }
 
 })
 

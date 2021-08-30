@@ -1,10 +1,7 @@
 const Event = require('../models/events');
 const User = require('../models/users');
-const { monthProperties } = require('../months');
 const {auxMonth, comparar} = require('../middleware')
-// const {monthProperties} = require('../months')
 
-// const month1 = require('../public/calendar');
 
 module.exports.renderHome = (req,res) => {
     res.render('home.ejs')
@@ -20,12 +17,10 @@ module.exports.eventList = async (req,res) => {
         month=req.query.month;
         year=req.query.year;
         day=req.query.day;
-    }
+    };
     const user = await User.findById(req.user._id).populate('events');
-    // const eventos = await Event.find({author:req.user._id});
     const eventosUnsorted = user.events;
     const eventos = eventosUnsorted.sort(comparar);
-    console.log(eventos);
     res.render('events/index', { eventos, auxMonth, year, day, month})
 };
 
@@ -41,11 +36,14 @@ module.exports.createEvent = async (req, res) => {
 };
 
 module.exports.showEvent = async (req, res) => {
+    try{
     const { id } = req.params;
-    // console.log(id)
     const evento = await Event.findById(id).populate('author');
-    // console.log(evento)
     res.render('events/show', { evento, auxMonth })
+    }catch{
+        req.flash('error','Evento não encontrado')
+        res.redirect('/events')
+    }
 };
 
 module.exports.showFormEdit = async (req, res) => {
@@ -65,7 +63,6 @@ module.exports.editEvent = async (req, res) => {
 
 module.exports.deleteEvent = async (req, res) => {
     const { id } = req.params;
-    const evento = await Event.findByIdAndDelete(id);
     const autor = await User.findById(req.user._id).populate('events');
     await autor.updateOne({$pull: {events: {$in: id}}});
     req.flash('success', 'Evento excluído com sucesso!');

@@ -9,7 +9,7 @@
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
       .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('submit', function (event) { //código retirado da pagina do bootstrap para validação
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()

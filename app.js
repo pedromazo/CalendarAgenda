@@ -69,14 +69,14 @@ db.once("open", () => {
 
 app.all('*',(req,res,next) => {
     next(new ExpressError('Page not found', 404))
-})
+});
 
 app.use((err,req,res,next) => { //middleware for hangling errors
     const {statusCode = 500} = err;
     if(!err.message) err.message = 'Algo de errado não está certo...';
     res.status(statusCode).render('error', { err });
 
-})
+});
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`)

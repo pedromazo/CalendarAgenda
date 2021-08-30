@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, checkForConflictInvite } = require('../middleware');
 const events = require('../controllers/events')
 const users = require('../controllers/users')
 const passport = require('passport')
@@ -21,12 +21,12 @@ router.route('/login')
 router.get('/logout', users.logout);
 
 router.route('/invites')
-        .get(isLoggedIn, users.inviteList)
-        .post(isLoggedIn, users.inviteFriend)
+        .get(isLoggedIn, catchAsync(users.inviteList))
+        .post(isLoggedIn, catchAsync(users.inviteFriend))
 
 router.route('/invites/:id')
-        .get(users.showInvite)
-        .post(users.acceptInvite)
-        .delete(users.declineInvite)
+        .get(isLoggedIn, catchAsync(users.showInvite))
+        .post(isLoggedIn, catchAsync(checkForConflictInvite), catchAsync(users.acceptInvite))
+        .delete(isLoggedIn, catchAsync(users.declineInvite))
 
 module.exports = router;
