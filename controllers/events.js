@@ -63,8 +63,23 @@ module.exports.editEvent = async (req, res) => {
 
 module.exports.deleteEvent = async (req, res) => {
     const { id } = req.params;
-    const autor = await User.findById(req.user._id).populate('events');
-    await autor.updateOne({$pull: {events: {$in: id}}});
-    req.flash('success', 'Evento excluído com sucesso!');
-    res.redirect('/events');
+    const autor = await User.findById(req.user._id)
+    const convidados = await User.find({ events: id })
+    const convites = await User.find({ invites: id })
+    const evento = await Event.findById(id)
+    if(evento.author.equals(req.user._id)){
+        for (convidado of convidados){
+            await convidado.updateOne({$pull: {events: {$in: id}}});
+        }
+        for (convite of convites) {
+            await convite.updateOne({$pull: {invites: {$in: id}}});
+        }
+        await Event.findByIdAndDelete(id);
+        req.flash('success', 'Evento excluído com sucesso!');
+        res.redirect('/events');
+    } else {
+        await autor.updateOne({$pull: {events: {$in: id}}});
+        req.flash('success','Evento retirado de sua lista com sucesso!')
+        res.redirect('/events')
+    }
 };

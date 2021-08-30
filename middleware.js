@@ -73,8 +73,10 @@ module.exports.checkForConflictInvite = async (req, res, next) => {
 module.exports.isAuthor = async (req, res, next) => {
     const { id } = req.params;
     const evento = await Event.findById(id);
-    const convidado = await User.find({invites:id})
-    if(!evento.author.equals(req.user._id) && convidado) {
+    const convite = await User.find({invites:id})
+    const convidado = await User.find({events:id, _id:req.user._id})
+    console.log(convidado)
+    if(!evento.author.equals(req.user._id) && !convite.length && !convidado.length) {
         req.flash('error', 'Você não tem permissão pra isso!');
         return res.redirect('/events');
     }

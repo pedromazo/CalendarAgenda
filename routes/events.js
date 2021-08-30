@@ -9,7 +9,7 @@ router.route('/')
         .post(isLoggedIn, validateEvent, catchAsync(checkForConflict), catchAsync(events.createEvent));
         
 router.route('/:id')
-        .get(isLoggedIn, catchAsync(events.showEvent))
+        .get(isLoggedIn, isAuthor, catchAsync(events.showEvent))
         .put(isLoggedIn, isAuthor, validateEvent, catchAsync(checkForConflict), catchAsync(events.editEvent))
         .delete(isLoggedIn, isAuthor, catchAsync(events.deleteEvent));
 
